@@ -1,13 +1,13 @@
 package org.example;
 
 public class Manager extends Employee {
-    private Exeutive executiveHost;
+    private Executive executiveHost;
 
-    public Exeutive getExecutiveHost() {
+    public Executive getExecutiveHost() {
         return executiveHost;
     }
 
-    public void setExecutiveHost(Exeutive executiveHost) {
+    public void setExecutiveHost(Executive executiveHost) {
         this.executiveHost = executiveHost;
     }
 
@@ -19,14 +19,25 @@ public class Manager extends Employee {
         super(id, name, salary);
     }
 
-    public Manager(String name, Integer salary, Exeutive executives) {
+    public Manager(String name, Integer salary, Executive executive) {
         super(name, salary);
-        this.executiveHost = executives;
+        setExecutiveHost(executive);
+        executive.managerList.add(this);
     }
 
-    public Manager(Integer id, String name, Integer salary, Exeutive executives) {
+    public Manager(Integer id, String name, Integer salary, Executive executive) {
         super(id, name, salary);
-        this.executiveHost = executives;
+        setExecutiveHost(executive);
+        executive.managerList.add(this);
+    }
+
+    @Override
+    protected void autoIncreaseSalary() {
+        if (executiveHost.getSalary() != null) {
+            increaseSalary(executiveHost.getSalary() / 10);
+        } else {
+            increaseSalary(10000);
+        }
     }
 
     protected String getInfo() {

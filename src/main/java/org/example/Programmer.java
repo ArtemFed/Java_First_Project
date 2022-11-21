@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Programmer extends Employee {
+public class Programmer extends Employee implements Gradeable {
     private List<String> projectsList;
 
     public Programmer(String name, Integer salary) {
@@ -12,6 +12,11 @@ public class Programmer extends Employee {
 
     public Programmer(Integer id, String name, Integer salary) {
         super(id, name, salary);
+    }
+
+    @Override
+    protected void autoIncreaseSalary() {
+        increaseSalary(250000 * projectsList.size());
     }
 
     public Programmer(String name, Integer salary, List<String> projects) {
@@ -40,5 +45,11 @@ public class Programmer extends Employee {
     @Override
     public String toString() {
         return "Programmer\n" + super.toString() + "Projects: " + projectsList;
+    }
+
+    @Override
+    public void autoIncreaseSalaryX2() {
+        autoIncreaseSalary();
+        autoIncreaseSalary();
     }
 }

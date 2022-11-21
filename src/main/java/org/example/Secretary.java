@@ -23,6 +23,11 @@ public class Secretary extends Employee {
         this.meetingsList = list;
     }
 
+    @Override
+    protected void autoIncreaseSalary() {
+        increaseSalary(5000 * meetingsList.size());
+    }
+
     public List<String> getMeetings() {
         return this.meetingsList;
     }

@@ -4,11 +4,8 @@ import java.util.TreeSet;
 
 public abstract class Employee {
     private static TreeSet<Integer> idList =  new TreeSet<Integer>();
-    private Integer id = 0;
 
-    public Integer getId() {
-        return id;
-    }
+    public final Integer id;
 
     private String name = "name";
 
@@ -41,8 +38,8 @@ public abstract class Employee {
         if (idList.isEmpty()) {
             idList.add(0);
         }
-
         idList.add(idList.last() + 1);
+        this.id = idList.last();
     }
 
     public Employee(Integer id, String name, Integer salary) {
@@ -61,9 +58,10 @@ public abstract class Employee {
         }
     }
 
+    protected abstract void autoIncreaseSalary();
 
     @Override
     public String toString() {
-        return "Id: " + getId() + "\nName: " + getName() + "\nSalary: " + getSalary() + "\n";
+        return "Id: " + id + "\nName: " + getName() + "\nSalary: " + getSalary() + "\n";
     }
 }
